@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 import './style.css';
 
@@ -100,10 +100,65 @@ const Cart = () => {
   );
 };
 
+//1 Counter
+// const Counter = () => {
+//   const [counter, setCounter] = useState(0);
+//   const incrementCounter = () => {
+//     setCounter((count) => count + 1);
+//   };
+
+//   const decrementCounter = () => {
+//     setCounter((count) => count - 1);
+//   };
+
+//   useEffect(() => {
+//     console.log(counter);
+//   });
+
+//   return (
+//     <>
+//       <h1>My Counter</h1>
+//       <div>
+//         <button onClick={incrementCounter}>+</button>
+//         <p>{counter}</p>
+//         <button onClick={decrementCounter}>-</button>
+//       </div>
+//     </>
+//   );
+// };
+
+//predict the output
+
+const Counter = () => {
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    // console.log('from useEffect...', counter);
+    localStorage.setItem('counter', counter);
+    console.log(`Hey! This is the initial value of Counter: ${counter}`);
+  }, []);
+
+  function incrementClickHandler() {
+    setCounter((counter) => {
+      // console.log('from click handler...', counter);
+      return counter + 1;
+    });
+  }
+
+  // console.log('before render...', counter);
+  return (
+    <div className="App">
+      <h1>{counter} </h1>
+      <button onClick={incrementClickHandler}>Increment </button>
+    </div>
+  );
+};
+
 export default function App() {
   return (
     <div>
-      <Cart />
+      {/* <Cart /> */}
+      <Counter />
     </div>
   );
 }
